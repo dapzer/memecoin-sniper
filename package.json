@@ -1,0 +1,19 @@
+{
+  "name": "memecoin-sniper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx tsc && node --env-file=.env dist/bot.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.5",
+    "typescript": "^5.4.4"
+  },
+  "dependencies": {
+    "grammy": "^1.22.4"
+  }
+}
