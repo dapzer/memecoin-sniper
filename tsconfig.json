@@ -3,7 +3,7 @@
     "outDir": "./dist",
     "target": "esnext",
     "useDefineForClassFields": true,
-    "module": "CommonJS",
+    "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
     "removeComments": true,

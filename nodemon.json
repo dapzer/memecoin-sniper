@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "src"
+  ],
+  "ignore": [
+    "dist"
+  ],
+  "exec": "node --no-warnings --loader ts-node/esm --enable-source-maps --trace-warnings --env-file=.env src/bot.ts",
+  "ext": "ts"
+}
