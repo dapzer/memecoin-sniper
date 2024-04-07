@@ -4,7 +4,7 @@
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "strict": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
@@ -19,5 +19,11 @@
     "declaration": true,
     "declarationMap": true,
     "strictPropertyInitialization": false
+  },
+  "include": ["src"],
+  "ts-node": {
+    "experimentalSpecifierResolution": "node",
+    "transpileOnly": true,
+    "esm": true,
   }
 }
