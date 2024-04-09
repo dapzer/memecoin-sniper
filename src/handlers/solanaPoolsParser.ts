@@ -1,8 +1,8 @@
 import { parse } from "node-html-parser"
-import { bot } from "../bot"
-import { getCoinKeyboard } from "../utils/getCoinKeyboard"
-import { getWordAfterPhrase } from "../utils/getWordAfterPhrase"
-import { chatService } from "../service/ChatService"
+import { bot } from "../bot.js"
+import { getCoinKeyboard } from "../utils/getCoinKeyboard.js"
+import { getWordAfterPhrase } from "../utils/getWordAfterPhrase.js"
+import { chatService } from "../service/ChatService.js"
 import { ScoreEnum } from "@prisma/client"
 
 export const solanaPoolsParser = async () => {

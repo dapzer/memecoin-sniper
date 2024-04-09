@@ -1,7 +1,7 @@
 import { Bot, Context } from "grammy";
 import { Menu } from "@grammyjs/menu";
-import { solanaPoolsParser } from "./handlers/solanaPoolsParser"
-import { chatService } from "./service/ChatService"
+import { solanaPoolsParser } from "./handlers/solanaPoolsParser.js"
+import { chatService } from "./service/ChatService.js"
 import { ScoreEnum } from "@prisma/client"
 
 export const bot = new Bot(process.env.BOT_TOKEN || "");

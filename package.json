@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
+  "main": "dist/bot.js",
   "scripts": {
-    "start": "npx tsc && node --env-file=.env dist/bot.js",
-    "dev": "nodemon --experimental-modules"
+    "start": "node --env-file=.env .",
+    "dev": "nodemon --experimental-modules",
+    "build": "tsc",
+    "database:generate": "prisma generate"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,5 @@
 import { ScoreEnum } from "@prisma/client"
-import { prisma } from "../lib/prismaClient"
+import { prisma } from "../lib/prismaClient.js"
 
 class ChatService {
   async getChats() {
