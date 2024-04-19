@@ -9,7 +9,7 @@ datasource db {
 
 model Chat {
   id             String      @id @default(uuid())
-  chatId         Int         @unique @map("chat_id")
+  chatId         String      @unique @map("chat_id")
   isSubscribed   Boolean     @default(false) @map("is_subscribed")
   selectedScores ScoreEnum[] @default([]) @map("selected_scores")
   sendedCoins    String[]    @default([]) @map("sended_coins")

@@ -9,7 +9,7 @@ class ChatService {
   async getChatIdByTelegramId(telegramId: number) {
     return prisma.chat.findUnique({
       where: {
-        chatId: telegramId
+        chatId: telegramId.toString()
       }
     })
   }
@@ -17,12 +17,12 @@ class ChatService {
   async createChat(telegramId: number) {
     return prisma.chat.create({
       data: {
-        chatId: telegramId
+        chatId: telegramId.toString()
       }
     })
   }
 
-  async updateSelectedScores(chatId: number, scores: ScoreEnum[]) {
+  async updateSelectedScores(chatId: string, scores: ScoreEnum[]) {
     return prisma.chat.update({
       where: {
         chatId
@@ -33,7 +33,7 @@ class ChatService {
     })
   }
 
-  async updateIsSubscribed(chatId: number, isSubscribed: boolean) {
+  async updateIsSubscribed(chatId: string, isSubscribed: boolean) {
     return prisma.chat.update({
       where: {
         chatId
@@ -44,7 +44,7 @@ class ChatService {
     })
   }
 
-  async getSelectedScores(chatId: number) {
+  async getSelectedScores(chatId: string) {
     const record = await prisma.chat.findUnique({
       where: {
         chatId
@@ -57,7 +57,7 @@ class ChatService {
     return record?.selectedScores || []
   }
 
-  async getIsSubscribed(chatId: number) {
+  async getIsSubscribed(chatId: string) {
     return prisma.chat.findUnique({
       where: {
         chatId
@@ -68,7 +68,7 @@ class ChatService {
     })
   }
 
-  async getSendedCoins(chatId: number) {
+  async getSendedCoins(chatId: string) {
     const  record = await prisma.chat.findUnique({
       where: {
         chatId
@@ -81,7 +81,7 @@ class ChatService {
     return record?.sendedCoins || []
   }
 
-  async updateSendedCoins(chatId: number, sendedCoins: string[]) {
+  async updateSendedCoins(chatId: string, sendedCoins: string[]) {
     return prisma.chat.update({
       where: {
         chatId

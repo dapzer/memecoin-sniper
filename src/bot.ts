@@ -20,29 +20,29 @@ const handleScore = async (ctx: Context, score: ScoreEnum) => {
   if (!chatId) {
     return;
   }
-  const currentScores = await chatService.getSelectedScores(chatId);
+  const currentScores = await chatService.getSelectedScores(chatId.toString());
 
-if (!currentScores.includes(score)) {
-    await chatService.updateSelectedScores(chatId, [...currentScores, score]);
+  if (!currentScores.includes(score)) {
+    await chatService.updateSelectedScores(chatId.toString(), [...currentScores, score]);
     await ctx.reply(`Score ${score} selected`);
     return;
   } else {
-    await chatService.updateSelectedScores(chatId, currentScores.filter(s => s !== score));
+    await chatService.updateSelectedScores(chatId.toString(), currentScores.filter(s => s !== score));
     await ctx.reply(`Score ${score} unselected`);
     return;
   }
 }
 
 const settingsMenu = new Menu("settings")
-  .text((ctx) => getButtonLabel(ctx, ScoreEnum.BAD),  async ctx => {
+  .text((ctx) => getButtonLabel(ctx, ScoreEnum.BAD), async ctx => {
     await handleScore(ctx, ScoreEnum.BAD);
     ctx.menu.update()
   })
-  .text((ctx) => getButtonLabel(ctx, ScoreEnum.NEUTRAL),  async ctx => {
+  .text((ctx) => getButtonLabel(ctx, ScoreEnum.NEUTRAL), async ctx => {
     await handleScore(ctx, ScoreEnum.NEUTRAL);
     ctx.menu.update()
   })
-  .text((ctx) => getButtonLabel(ctx, ScoreEnum.GOOD),  async ctx => {
+  .text((ctx) => getButtonLabel(ctx, ScoreEnum.GOOD), async ctx => {
     await handleScore(ctx, ScoreEnum.GOOD);
     ctx.menu.update()
   })
@@ -50,28 +50,32 @@ const settingsMenu = new Menu("settings")
 bot.use(settingsMenu)
 
 bot.command("start", async (ctx) => {
-    if (!await chatService.getChatIdByTelegramId(ctx.chat.id)) {
-      await chatService.createChat(ctx.chat.id)
-    } else {
-      await chatService.updateIsSubscribed(ctx.chat.id!, false)
-    }
+    try {
+      if (!await chatService.getChatIdByTelegramId(ctx.chat.id)) {
+        await chatService.createChat(ctx.chat.id)
+      } else {
+        await chatService.updateIsSubscribed(ctx.chat.id!.toString(), false)
+      }
 
-    ctx.reply("Welcome! Select a score for parsing.", { reply_markup: settingsMenu })
+      ctx.reply("Welcome! Select a score for parsing.", { reply_markup: settingsMenu })
+    } catch (e) {
+      console.log(e)
+    }
   }
 )
 
 bot.command("changescore", async (ctx) => {
-  chatService.updateIsSubscribed(ctx.chat.id!, false)
+  chatService.updateIsSubscribed(ctx.chat.id!.toString(), false)
   ctx.reply("Select a score for parsing.", { reply_markup: settingsMenu })
 })
 
 bot.command("unsubscribe", (ctx) => {
-  chatService.updateIsSubscribed(ctx.chat.id!, false)
+  chatService.updateIsSubscribed(ctx.chat.id!.toString(), false)
   ctx.reply("Unsubscribed!")
 })
 
 bot.command("subscribe", (ctx) => {
-  chatService.updateIsSubscribed(ctx.chat.id!, true)
+  chatService.updateIsSubscribed(ctx.chat.id!.toString(), true)
   ctx.reply("Subscribed!")
 })
 
